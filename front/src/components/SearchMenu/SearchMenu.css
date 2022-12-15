@@ -1,0 +1,40 @@
+.SearchMenu {
+    background-color: white;
+    width: 502px;
+    border: 1px solid rgba(0,0,0,0.25);
+    margin: 5px 3% 20px 2.5% ;
+    height: 375px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    position: absolute;
+    z-index: 1;
+}
+
+
+.name, .charge, .country, .channel, .company, .interest {
+    display: flex;
+    align-items: center;
+}
+
+.SearchMenu p {
+    margin: 0 30px 0 17.2px;
+    text-align: start;
+    font-size: 13px;
+    width: 145px;
+    font-weight: 600;
+}
+.SearchMenu input {
+    width: 300px;
+    font-family: 'Open sans';
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+}
+.SearchMenu input:focus {
+    outline: none
+}
+.SearchMenu select {
+    width: 190px;
+    height: 35.5px;
+    border: 1px solid rgba(0,0,0,0.25);
+}

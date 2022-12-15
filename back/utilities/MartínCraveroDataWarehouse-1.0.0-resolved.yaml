@@ -1,0 +1,1299 @@
+---
+swagger: "2.0"
+info:
+  description: API de gestión de Contactos DataWarehouse
+  version: 1.0.0
+  title: DataWarehouse
+  contact:
+    email: martincravero123@gmail.com
+host: virtserver.swaggerhub.com
+basePath: http://localhost:3000/
+tags:
+- name: Usuarios
+  description: Alta, modificación y baja de usuarios
+- name: Ubicaciones
+  description: Alta, modificación y baja de direcciones
+- name: Empresa
+  description: Alta, modificación y baja de compañías
+- name: Contactos
+  description: Gestión de contacts
+schemes:
+- https
+paths:
+  /usuarios/signUp:
+    post:
+      tags:
+      - Usuarios
+      summary: Registra un nuevo usuario
+      parameters:
+      - in: body
+        name: body
+        description: Datos del usuario a registrar
+        required: true
+        schema:
+          $ref: '#/definitions/signUp'
+      responses:
+        "200":
+          description: Usuario Registrado Correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200'
+        "402":
+          description: El usuario ya se encuentra registrado o el E-mail utilizado
+        "403":
+          description: Debe Completar TODOS los datos
+        "404":
+          description: Debe ingresar un email válido
+        "406":
+          description: No se ha modificado ningun dato
+        "500":
+          description: Usuario NO Registrado
+  /usuarios/login:
+    post:
+      tags:
+      - Usuarios
+      summary: Logea al usuario
+      parameters:
+      - in: body
+        name: body
+        description: Datos del usuario
+        required: true
+        schema:
+          $ref: '#/definitions/login'
+      responses:
+        "200":
+          description: Usuario Logeado Correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_1'
+        "401":
+          description: Datos Ingresados Inválidos
+  /usuarios:
+    get:
+      tags:
+      - Usuarios
+      summary: Obtiene un detalle de todos los usuarios disponibles
+      parameters: []
+      security:
+      - ApiKeyAuth: []
+      - AdminAuth: []
+      responses:
+        "200":
+          description: 'El listado de usuarios es el siguiente:'
+          schema:
+            $ref: '#/definitions/inline_response_200_2'
+        "500":
+          description: Error al consultar la lista de usuarios
+    put:
+      tags:
+      - Usuarios
+      summary: Modifica datos de un usuario
+      parameters:
+      - in: body
+        name: body
+        description: Datos del usuario a modificar
+        required: true
+        schema:
+          $ref: '#/definitions/editarUsuarios'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Usuario Modificado Correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_3'
+        "403":
+          description: Debe Completar TODOS los datos
+        "404":
+          description: Debe ingresar un email válido
+        "406":
+          description: No se ha modificado ningun dato
+        "405":
+          description: No posee los privilegios para realizar la acción solicitada
+        "500":
+          description: Error al modificar datos del usuario
+    delete:
+      tags:
+      - Usuarios
+      summary: Borra la cuenta del usuario
+      parameters:
+      - in: body
+        name: body
+        description: Datos del usuario
+        required: true
+        schema:
+          $ref: '#/definitions/elimUsuarios'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Usuario Eliminado Correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "405":
+          description: No posee los privilegios para realizar la acción solicitada
+        "408":
+          description: No se puede eliminar el Master USER
+        "500":
+          description: Error al eliminar al Usuario
+  /ubicaciones:
+    get:
+      tags:
+      - Ubicacion
+      summary: Obtiene un detalle de las ubicaciones
+      parameters:
+      - name: region
+        in: query
+        description: Listado de regiones
+        required: false
+        type: string
+      - name: pais
+        in: query
+        description: Listado de paises
+        required: false
+        type: string
+      - name: provincia
+        in: query
+        description: Listado de provincias
+        required: false
+        type: string
+      - name: id_pais
+        in: query
+        description: Listado de paises
+        required: false
+        type: integer
+      - name: ciudad
+        in: query
+        description: Listado de ciudades
+        required: false
+        type: string
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: 'El detalle de ubicaciones es:'
+          schema:
+            $ref: '#/definitions/inline_response_200_5'
+        "500":
+          description: Error al obtener las ubicaciones
+    put:
+      tags:
+      - Ubicacion
+      summary: Modifica ubicaciones ya cargadas
+      parameters:
+      - in: body
+        name: body
+        description: datos de ubicacion a modificar
+        required: false
+        schema:
+          $ref: '#/definitions/editarUbicaciones'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: La dirección ha sido modificada correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_6'
+        "500":
+          description: Error al modificar la dirección o la dirección ya existes
+  /ubicaciones/subregiones:
+    get:
+      tags:
+      - Ubicacion
+      summary: Obtiene un detalle de las subregiones-paises
+      parameters:
+      - name: subregion
+        in: query
+        description: Listado de regiones
+        required: false
+        type: string
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: El Listado de las subregiones es el siguiente
+          schema:
+            $ref: '#/definitions/inline_response_200_7'
+        "201":
+          description: El Listado de las paises pertenecientes a la subregion es el siguiente
+          schema:
+            $ref: '#/definitions/inline_response_201'
+        "500":
+          description: Error al consultar el listado de subregiones/paises
+  /ubicaciones/pais:
+    post:
+      tags:
+      - Ubicacion
+      summary: Agrega un país
+      parameters:
+      - in: body
+        name: body
+        description: Datos del país a agregar
+        required: true
+        schema:
+          $ref: '#/definitions/nuevosPaises'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: El pais ha sido agregado correctamente!`
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "500":
+          description: Error al agregar el país
+    delete:
+      tags:
+      - Ubicacion
+      summary: Borra un país
+      parameters:
+      - in: body
+        name: body
+        description: Datos del país a borrar
+        required: true
+        schema:
+          $ref: '#/definitions/elimPaises'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: País eliminado correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "500":
+          description: Error al eliminar el país seleccionado
+  /ubicaciones/provincia:
+    post:
+      tags:
+      - Ubicacion
+      summary: Agrega una provincia-estado
+      parameters:
+      - in: body
+        name: body
+        description: Datos de la provincia-estado a agregar
+        required: true
+        schema:
+          $ref: '#/definitions/nuevasProvincias'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: La provincia ha sido agregada correctamente!
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "500":
+          description: Error al agregar la provincia
+    delete:
+      tags:
+      - Ubicacion
+      summary: Borra una provincia-estado
+      parameters:
+      - in: body
+        name: body
+        description: Datos de la provincia-estado país a borrar
+        required: true
+        schema:
+          $ref: '#/definitions/removeState'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Provincia eliminada exitosamente
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "408":
+          description: Primero debe eliminar las ciudades asociadas a la provincia
+  /ubicaciones/ciudad:
+    post:
+      tags:
+      - Ubicacion
+      summary: Agrega una dirección
+      parameters:
+      - in: body
+        name: body
+        description: Datos de la dirección a agregar
+        required: true
+        schema:
+          $ref: '#/definitions/nuevasCiudades'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: La ciudad ha sido agregada correctamente!
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "409":
+          description: El domicilio de la Ciudad ya se encuentra cargado en el Estado/Provincia
+        "500":
+          description: Error al agregar la dirección
+    delete:
+      tags:
+      - Ubicacion
+      summary: Borra una dirección
+      parameters:
+      - in: body
+        name: body
+        description: Datos de la provincia-estado país a borrar
+        required: true
+        schema:
+          $ref: '#/definitions/elimCiudades'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Ciudad/Domicilio eliminado exitosamente
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "500":
+          description: Error al eliminar la Ciudad/Domicilio
+  /empresa:
+    get:
+      tags:
+      - Empresas
+      summary: Obtiene un detalle de todas las compañías
+      parameters: []
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: 'La lista de companies es:'
+          schema:
+            $ref: '#/definitions/inline_response_200_8'
+        "500":
+          description: Error al consultar la lista de compañías
+    post:
+      tags:
+      - Empresas
+      summary: Agrega una nueva compañía
+      parameters:
+      - in: body
+        name: body
+        description: Datos de la compañía a registrar
+        required: true
+        schema:
+          $ref: '#/definitions/nuevasEmpresas'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Compañía agregada Correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "403":
+          description: Debe Completar TODOS los datos
+        "500":
+          description: Error al agregar la compañía
+    put:
+      tags:
+      - Empresas
+      summary: Modifica una compañía existente
+      parameters:
+      - in: body
+        name: body
+        description: Datos de la compañía a modificar
+        required: true
+        schema:
+          $ref: '#/definitions/editarEmpresas'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Companía modificada correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "403":
+          description: Debe Completar TODOS los datos
+        "500":
+          description: Error al modificar la compañía
+    delete:
+      tags:
+      - Empresas
+      summary: Elimina una compañía
+      parameters:
+      - in: body
+        name: body
+        description: iD de la compañía a eliminar
+        required: true
+        schema:
+          $ref: '#/definitions/elimEmpresas'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Companía eliminada correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "410":
+          description: Compañía asociada a algún contacto. Primero debe eliminar o modificar dicho vínculo
+  /contactos:
+    get:
+      tags:
+      - Contactos
+      summary: Obtiene un detalle de todos los contactos
+      parameters: []
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: 'La lista de contactos es:'
+          schema:
+            $ref: '#/definitions/inline_response_200_9'
+        "500":
+          description: Error al consultar la lista de contactos
+    post:
+      tags:
+      - Contactos
+      summary: Agrega un nuevo contacto
+      parameters:
+      - in: body
+        name: body
+        description: Datos del contacto a registrar
+        required: true
+        schema:
+          $ref: '#/definitions/nuevosContactos'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Contacto agregado correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "403":
+          description: Debe Completar TODOS los datos
+        "404":
+          description: Debe ingresar un email válido
+        "406":
+          description: No se ha modificado ningun dato
+        "407":
+          description: El usuario o Email que desea ingresar ya existe en la Base de Datos
+        "411":
+          description: Debe ingresar al menos 1 canal de contacto
+        "500":
+          description: Error al agregar el contacto
+    put:
+      tags:
+      - Contactos
+      summary: Modifica un contacto existente
+      parameters:
+      - in: body
+        name: body
+        description: Datos del contacto a modificar
+        required: true
+        schema:
+          $ref: '#/definitions/editrContactos'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Contacto ha sido modificado correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "403":
+          description: Debe Completar TODOS los datos
+        "404":
+          description: Debe ingresar un email válido
+        "406":
+          description: No se ha modificado ningun dato
+        "411":
+          description: Debe ingresar al menos 1 canal de contacto
+        "500":
+          description: Error al editar el contacto
+    delete:
+      tags:
+      - Contactos
+      summary: Elimina un contacto
+      parameters:
+      - in: body
+        name: body
+        description: iD del contacto a eliminar
+        required: true
+        schema:
+          $ref: '#/definitions/elimContactos'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: El contacto ha sido eliminado correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "500":
+          description: Error al eliminar el contacto
+  /contactos/massive:
+    delete:
+      tags:
+      - Contactos
+      summary: Elimina multiples contacts
+      parameters:
+      - in: body
+        name: body
+        description: iDs del contacto a eliminar
+        required: true
+        schema:
+          $ref: '#/definitions/elimVariosContactos'
+      security:
+      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Contactos eliminados correctamente
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
+        "500":
+          description: Error al eliminar los contactos
+securityDefinitions:
+  ApiKeyAuth:
+    description: Token de seguridad
+    type: apiKey
+    name: JWT-apiKey
+    in: header
+  AdminAuth:
+    description: Rol Admin requerido
+    type: basic
+definitions:
+  signUp:
+    type: object
+    required:
+    - email
+    - apellido
+    - nombre
+    - clave
+    properties:
+      nombre:
+        type: string
+        description: usuario
+      apellido:
+        type: string
+        description: nombre completo del usuario
+      email:
+        type: string
+        description: email del usuario
+      clave:
+        type: string
+        description: contraseña del usuario
+  login:
+    type: object
+    required:
+    - clave
+    - usuario
+    properties:
+      usuario:
+        type: string
+        description: usuario
+      clave:
+        type: string
+        description: contraseña del usuario
+  loginkey:
+    type: object
+    required:
+    - email
+    - id_usuario
+    - key
+    - apellido
+    - nombre
+    - rol
+    properties:
+      id_usuario:
+        type: integer
+        description: ID del usuario
+      nombre:
+        type: string
+        description: nombre del usuario
+      apellido:
+        type: string
+        description: apellido del usuario
+      email:
+        type: string
+        description: email del usuario
+      rol:
+        type: string
+        description: rol del usuario
+      key:
+        type: string
+        description: token
+  selecUsuarios:
+    type: object
+    required:
+    - email
+    - id_usuario
+    - apellido
+    - nombre
+    - clave
+    - rol
+    properties:
+      id_usuario:
+        type: integer
+        description: ID del usuario
+      nombre:
+        type: string
+        description: nombre del usuario
+      apellido:
+        type: string
+        description: apellido del usuario
+      email:
+        type: string
+        description: email del usuario
+      rol:
+        type: string
+        description: rol del usuario
+      clave:
+        type: string
+        description: contraseña del usuario
+  editarUsuarios:
+    type: object
+    required:
+    - email
+    - id_usuario
+    - apellido
+    - nanombreme
+    - clave
+    - rol
+    properties:
+      id_usuario:
+        type: integer
+        description: ID del usuario
+      nombre:
+        type: string
+        description: nombre del usuario
+      apellido:
+        type: string
+        description: apellido del usuario
+      email:
+        type: string
+        description: email del usuario
+      rol:
+        type: string
+        description: rol del usuario
+      clave:
+        type: string
+        description: contraseña del usuario
+  elimUsuarios:
+    type: object
+    required:
+    - id_usuario
+    - apellido
+    - nombre
+    properties:
+      id_usuario:
+        type: integer
+        description: ID del usuario
+      nombre:
+        type: string
+        description: nombre del usuario
+      apellido:
+        type: string
+        description: apellido del usuario
+  selecUbicacion:
+    type: object
+    required:
+    - pais
+    - id_pais
+    - region
+    - subregion
+    properties:
+      id_pais:
+        type: integer
+        description: ID del pais
+      pais:
+        type: string
+        description: nombre del pais
+      region:
+        type: string
+        description: nombre de la region del pais
+      subregion:
+        type: string
+        description: nombre de la subregion del pais
+  editarUbicaciones:
+    type: object
+    required:
+    - direccion
+    - ciudad
+    - pais
+    - id_ciudad
+    - id_pais
+    - id_provincia
+    - provincia
+    properties:
+      id_pais:
+        type: integer
+        description: ID del pais
+      pais:
+        type: string
+        description: nombre del pais
+      id_provincia:
+        type: integer
+        description: ID del estado-provincia
+      provincia:
+        type: string
+        description: nombre del estado-provincia
+      id_ciudad:
+        type: integer
+        description: ID de la ciudad
+      ciudad:
+        type: string
+        description: nombre de la ciudad
+      direccion:
+        type: string
+        description: dirección
+  selecTodasSubregiones:
+    type: object
+    required:
+    - subregion
+    properties:
+      subregion:
+        type: string
+        description: subregiones
+  nuevosPaises:
+    type: object
+    required:
+    - pais
+    - region
+    - subregion
+    properties:
+      pais:
+        type: string
+        description: nombre del pais
+      region:
+        type: string
+        description: nombre de la region del pais
+      subregion:
+        type: string
+        description: nombre de la subregion del pais
+  elimPaises:
+    type: object
+    required:
+    - pais
+    - id_pais
+    properties:
+      id_pais:
+        type: integer
+        description: ID del pais
+      pais:
+        type: string
+        description: nombre del pais
+  nuevasProvincias:
+    type: object
+    required:
+    - id_pais
+    - provincia
+    properties:
+      id_pais:
+        type: integer
+        description: ID del pais
+      provincia:
+        type: string
+        description: nombre de la provincia
+  elimProvincias:
+    type: object
+    required:
+    - id_provincia
+    - provincia
+    properties:
+      id_provincia:
+        type: integer
+        description: ID de la provincia
+      provincia:
+        type: string
+        description: nombre de la provincia
+  nuevasCiudades:
+    type: object
+    required:
+    - direccion
+    - ciudad
+    - id_pais
+    - id_provincia
+    properties:
+      id_pais:
+        type: integer
+        description: ID del pais
+      id_provincia:
+        type: integer
+        description: ID de la provincia
+      ciudad:
+        type: string
+        description: nombre de la ciudad
+      direccion:
+        type: string
+        description: dirección a agregar
+  elimProvincias:
+    type: object
+    required:
+    - id_ciudad
+    properties:
+      id_ciudad:
+        type: integer
+        description: ID de la ciudada a borrar
+  selecEmpresas:
+    type: object
+    required:
+    - direccion
+    - pais
+    - id_ciudad
+    - id_empresa
+    - id_pais
+    - id_provincia
+    - nombre
+    - telefono
+    - provincia
+    properties:
+      id_empresa:
+        type: integer
+        description: ID de la compañía
+      nombre:
+        type: string
+        description: nombre de la compañía
+      telefono:
+        type: integer
+        description: telefono de la compañía
+      id_ciudad:
+        type: integer
+        description: ID de la ciudad de la compañía
+      ciudad:
+        type: string
+        description: ciudad de la compañía
+      direccion:
+        type: string
+        description: dirección de la compañía
+      id_provincia:
+        type: integer
+        description: ID de la provincia donde se encuentra la compañía
+      provincia:
+        type: string
+        description: provincia donde se encuentra la compañía
+      id_pais:
+        type: integer
+        description: ID del país donde se encuentra la compañía
+      pais:
+        type: string
+        description: país donde se encuentra la compañía
+  nuevasEmpresas:
+    type: object
+    required:
+    - id_ciudad
+    - nombre
+    - telefono
+    properties:
+      nombre:
+        type: string
+        description: nombre de la compañía
+      telefono:
+        type: integer
+        description: telefono de la compañía
+      id_ciudad:
+        type: integer
+        description: ID de la ciudad de la compañía
+  editarEmpresas:
+    type: object
+    required:
+    - id_ciudad
+    - id_empresa
+    - nombre
+    - telefono
+    properties:
+      id_empresa:
+        type: integer
+        description: ID de la compañía
+      nombre:
+        type: string
+        description: nombre de la compañía
+      telefono:
+        type: integer
+        description: telefono de la compañía
+      id_ciudad:
+        type: integer
+        description: ID de la ciudad de la compañía
+  elimEmpresas:
+    type: object
+    required:
+    - id_empresa
+    properties:
+      id_empresa:
+        type: integer
+        description: ID de la compañía
+  selecContactos:
+    type: object
+    required:
+    - direccion
+    - redes
+    - ciudad
+    - nombre_empresa
+    - pais
+    - email
+    - id_ciudad
+    - id_empresa
+    - id_contacto
+    - interes
+    - apellido
+    - nombre
+    - ubicacion
+    - foto
+    - provincia
+    - subregion
+    properties:
+      id_contacto:
+        type: integer
+        description: ID del contacto
+      nombre:
+        type: string
+        description: nombre del contacto
+      apellido:
+        type: string
+        description: apellido del contacto
+      email:
+        type: string
+        description: email del contacto
+      id_empresa:
+        type: integer
+        description: ID de la compañía a la que pertenece el contacto
+      nombre_empresa:
+        type: string
+        description: nombre de la compañía a la que pertenece el contacto
+      ocupacion:
+        type: string
+        description: ocupacion del contacto
+      foto:
+        type: string
+        description: URL de imagen de contacto
+      interes:
+        type: integer
+        description: nivel de interes del contacto
+      id_ciudad:
+        type: integer
+        description: ID de la ciudad del contact
+      ciudad:
+        type: string
+        description: ciudad del contacto
+      direccion:
+        type: string
+        description: dirección del contacto
+      provincia:
+        type: string
+        description: provincia donde se encuentra el contacto
+      pais:
+        type: string
+        description: país donde se encuentra el contacto
+      subregion:
+        type: string
+        description: subregion donde se encuentra el contacto
+      redes:
+        type: array
+        description: canales de contacto
+        items:
+          $ref: '#/definitions/selecContactosRedes'
+  nuevosContactos:
+    type: object
+    required:
+    - redSocData
+    - email
+    - id_ciudad
+    - id_empresa
+    - interes
+    - apellido
+    - nombre
+    - ocupacion
+    - foto
+    properties:
+      nombre:
+        type: string
+        description: nombre del contacto
+      apellido:
+        type: string
+        description: apellido del contacto
+      email:
+        type: string
+        description: email del contacto
+      id_empresa:
+        type: integer
+        description: ID de la compañía a la que pertenece el contacto
+      ocuapacion:
+        type: string
+        description: ocupacion del contacto
+      foto:
+        type: string
+        description: URL de imagen de contacto
+      interes:
+        type: integer
+        description: nivel de interes del contacto
+      id_ciudad:
+        type: integer
+        description: ID de la ciudad del contact
+      redSocData:
+        type: array
+        description: canales de contacto
+        items:
+          $ref: '#/definitions/addContacts_channelData'
+  editarContactos:
+    type: object
+    required:
+    - email
+    - id_ciudad
+    - id_empresa
+    - id_contacto
+    - interes
+    - apellido
+    - nombre
+    - newRedSocData
+    - ocupacion
+    - foto
+    properties:
+      id_contacto:
+        type: integer
+        description: ID del contacto a modificar
+      nombre:
+        type: string
+        description: nombre del contacto
+      apellido:
+        type: string
+        description: apellido del contacto
+      email:
+        type: string
+        description: email del contacto
+      id_empresa:
+        type: integer
+        description: ID de la compañía a la que pertenece el contacto
+      ocupacion:
+        type: string
+        description: ocupacion del contacto
+      foto:
+        type: string
+        description: URL de imagen de contacto
+      interes:
+        type: integer
+        description: nivel de interes del contacto
+      id_ciudad:
+        type: integer
+        description: ID de la ciudad del contact
+      newRedSocData:
+        type: array
+        description: canales de contacto
+        items:
+          $ref: '#/definitions/nuevoContactoRed'
+  elimContactos:
+    type: object
+    required:
+    - id_contacto
+    - apellido
+    - nombre
+    properties:
+      id_contacto:
+        type: integer
+        description: ID del contacto a eliminar
+      nombre:
+        type: string
+        description: nombre del contacto
+      apellido:
+        type: string
+        description: apellido del contacto
+  inline_response_200:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Si se resolvió con error o sin error
+      status:
+        type: integer
+        description: Código de resolucion de peticion
+      message:
+        type: string
+        description: Respuesta del servidor
+      response:
+        type: array
+        description: datos del usuario
+        items:
+          $ref: '#/definitions/signUp'
+  inline_response_200_1:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Si se resolvió con error o sin error
+      status:
+        type: integer
+        description: Código de resolucion de peticion
+      message:
+        type: string
+        description: Respuesta del servidor
+      response:
+        type: array
+        description: datos del usuario
+        items:
+          $ref: '#/definitions/loginkey'
+  inline_response_200_2:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Si se resolvió con error o sin error
+      status:
+        type: integer
+        description: Código de resolucion de peticion
+      message:
+        type: string
+        description: Respuesta del servidor
+      response:
+        type: array
+        description: 'La lista de usuarios es:'
+        items:
+          $ref: '#/definitions/selecUsuarios'
+  inline_response_200_3:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Si se resolvió con error o sin error
+      status:
+        type: integer
+        description: Código de resolucion de peticion
+      message:
+        type: string
+        description: Respuesta del servidor
+      response:
+        type: array
+        description: nuevos datos del usuario
+        items:
+          $ref: '#/definitions/editarUsuarios'
+  inline_response_200_4:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Si se resolvió con error o sin error
+      status:
+        type: integer
+        description: Código de resolucion de peticion
+      message:
+        type: string
+        description: Respuesta del servidor
+  inline_response_200_5:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Si se resolvió con error o sin error
+      status:
+        type: integer
+        description: Código de resolucion de peticion
+      message:
+        type: string
+        description: Respuesta del servidor
+      response:
+        type: array
+        description: Detalle del pedido
+        items:
+          $ref: '#/definitions/editarUbicaciones'
+  inline_response_200_6:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Si se resolvió con error o sin error
+      status:
+        type: integer
+        description: Código de resolucion de peticion
+      message:
+        type: string
+        description: Respuesta del servidor
+      response:
+        type: array
+        description: Detalle de la ubicación modificada
+        items:
+          $ref: '#/definitions/editarUbicaciones'
+  inline_response_200_7:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Si se resolvió con error o sin error
+      status:
+        type: integer
+        description: Código de resolucion de peticion
+      message:
+        type: string
+        description: Respuesta del servidor
+      response:
+        type: array
+        description: detalle de las subregiones-paises
+        items:
+          $ref: '#/definitions/selecTodasSubregiones'
+  inline_response_201:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Si se resolvió con error o sin error
+      status:
+        type: integer
+        description: Código de resolucion de peticion
+      message:
+        type: string
+        description: Respuesta del servidor
+      response:
+        type: array
+        description: detalle de las subregiones-paises
+        items:
+          $ref: '#/definitions/selecUbicacion'
+  inline_response_200_8:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Si se resolvió con error o sin error
+      status:
+        type: integer
+        description: Código de resolucion de peticion
+      message:
+        type: string
+        description: Respuesta del servidor
+      response:
+        type: array
+        description: 'La lista de companías es:'
+        items:
+          $ref: '#/definitions/selecEmpresas'
+  inline_response_200_9:
+    type: object
+    properties:
+      error:
+        type: boolean
+        description: Si se resolvió con error o sin error
+      status:
+        type: integer
+        description: Código de resolucion de peticion
+      message:
+        type: string
+        description: Respuesta del servidor
+      response:
+        type: array
+        description: 'La lista de contactos es:'
+        items:
+          $ref: '#/definitions/selecContactos'
+  selecContactos_redes:
+    type: object
+    required:
+    - nombre
+    - preferencias
+    - cuenta_usuario
+    properties:
+      nombre:
+        type: string
+        description: nombre del canal
+      cuenta_usuario:
+        type: string
+        description: cuenta del canal
+      preferencias:
+        type: string
+        description: preferencias del canal
+  nuevosContactos_RedesData:
+    type: object
+    required:
+    - facebookUsuario
+    - instagramUsuario
+    - twitterUsuario
+    - whatsappUsuario
+    properties:
+      whatsappUsuario:
+        type: string
+        description: usuario del canal
+      instagramUsuario:
+        type: string
+        description: usuario del canal
+      twitttwitterUsuarioerUser:
+        type: string
+        description: usuario del canal
+      facebookUsuario:
+        type: string
+        description: usuario del canal

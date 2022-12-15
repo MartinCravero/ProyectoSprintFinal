@@ -1,0 +1,104 @@
+.title {
+    text-align: start;
+    margin: 40px 0 0 3%;
+    color: #333333;
+}
+.ContactsFunctions {
+    display: flex;
+    margin: 20px 2.5% 0 2.5% ;
+    justify-content: space-between;
+}
+.SearchPanel {
+    display: flex;
+}
+.SearchInput {
+    width: 461px;
+    height: 41px;
+    border-radius: 3.5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 1px solid rgba(0,0,0,0.25);
+    border-right: none;
+    padding-left: 3.8%;
+    font-family: 'Open sans';
+}
+.SearchInput:focus {
+    outline: none
+}
+.DownBtn {
+    width: 41px;
+    height: 41px;
+    border-radius: 3.5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin: 0 0 0 0px;
+    border: 1px solid rgba(0,0,0,0.25);
+    border-left: none;
+}
+.SearchBtn{
+    margin: 0 0 0 9px;
+    width: 41px;
+    height: 41px;
+    border: 1px solid rgba(0,0,0,0.25);
+}
+.SearchIcon {
+    color: #0462BB;
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.ContactsPanel {
+    display: flex;
+}
+.ImportBtn {
+    width: 41px;
+    height: 41px;
+    border: 1px solid #0683F9;
+}
+.ImportIcon {
+    color: #0683F9;
+    font-size: 18px;
+    font-weight: 200;
+}
+.ExportBtn {
+    color: #0683F9;
+    width: 172px;
+    height: 41px;
+    border: 1px solid #0683F9;
+}
+.AddBtn {
+    color: white;
+    background-color: #1D72C2;
+    width: 172px;
+    height: 41px;
+    border: 1px solid #0683F9;
+}
+.selectedContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 21px 2.5% 4.5px 2.5%;
+    position: absolute;
+    width: 95%;
+}
+.selectedQuantity {
+    background-color: #e6f2fe;
+    color: #48a3fa;
+    width: 95px;
+    height: 24px;
+    font-size: 10px;
+    text-align: center;
+    line-height: 24px;
+    font-weight: 600;
+}
+.trashBtn {
+    display: flex;
+    justify-content: space-evenly;
+    color: #1D72C2;
+    width: 160px;
+    cursor: pointer;
+}
+.trashBtn h4{
+    font-weight: 500;
+    font-family: 'Open Sans';
+    font-size: 14px;
+}

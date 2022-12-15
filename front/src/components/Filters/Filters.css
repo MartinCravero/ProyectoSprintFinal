@@ -1,0 +1,28 @@
+.filterContainer {
+    display: flex;
+    margin: 10px 0 0 3%;
+    position: absolute;
+}
+
+.filterContainer div {
+    display: flex;
+    align-items: center;
+    height: 22px;
+    border-radius: 5px;
+    background-color: ghostwhite;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 8px;
+    padding: 0 6px;
+}
+
+.filterContainer div h4 {
+    font-size: 13px;
+    font-weight: 400;
+}
+.filterContainer button {
+    margin: 0 0 0 7px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+}

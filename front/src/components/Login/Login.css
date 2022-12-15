@@ -1,0 +1,77 @@
+.loginBodyContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+.loginBodyContainer {
+    margin-top: 50px;
+}
+.loginBodyContainer > h1 {
+    align-self: center;
+}
+
+.loginSection form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginSection div.regUserForm{
+    margin-top: 20px;
+    background-color: gainsboro;
+    border: 2px solid black;
+    width: 450px;
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+.loginSection div.loginUserForm{
+    margin-top: 20px;
+    background-color: gainsboro;
+    border: 2px solid black;
+    width: 450px;
+    height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+.loginSection p{
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.loginSection input {
+    border: 1px #CCCCCC solid;
+    height: 35.5px;
+    width: 190px;
+    font-family: 'Open Sans';
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.loginSection select {
+    border: 1px #CCCCCC solid;
+    height: 35.5px;
+    width: 190px;
+    font-family: 'Open Sans';
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.loginSection button {
+    margin-top: 30px;
+    color: white;
+    border-radius: 2px;
+    background-color: #2c902c;
+    border: 1px solid #0683F9;
+    height: 35px;
+    width: 150px;
+}

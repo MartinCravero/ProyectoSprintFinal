@@ -1,0 +1,37 @@
+.progress {
+	border-radius: 20px;
+	background-color: #DDDDDD;
+	position: relative;
+	margin: 15px 0;
+	height: 13px;
+	width: 235px;
+}
+
+.progress-done {
+	border-radius: 20px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	transition: 0.4s ease;
+}
+
+.progress25 {
+	background-color: #1CC1F5;
+}
+.progress50 {
+	background-color: #FFC700;
+}
+.progress75 {
+	background-color: #FF6F00;
+}
+.progress100 {
+	background-color: #DE0028;
+}
+/* Para la pagina principal */
+td .interestTd .progress{
+	width: 109px;
+	height: 8px;
+	margin: 0 10px;
+}

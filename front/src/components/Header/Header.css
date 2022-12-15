@@ -1,0 +1,67 @@
+.App-header {
+    background-color: #1D72C2;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* font-size: calc(10px + 2vmin); */
+    color: white;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 30px;
+    margin: 0px 3%;
+}
+.headerUser {
+    display: flex;
+    height: 64px;
+    width: 250px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.headerUser p{
+    color: gold;
+    font-size: 14px;
+    vertical-align: bottom;
+}
+
+.headerUser button{
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+}
+.headerUser button:hover{
+    font-size: 19px;
+}
+.NavBarDiv {
+    height: 64px;
+    margin: 0px 3%;
+}
+.NavBar {
+    height: 100%;
+    display: flex;
+    list-style-type: none;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+.NavBarItem {
+    margin: 0 20px;
+    width: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.NavBarLink{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.NavBarItem:hover .NavBarLink {
+    font-weight: bold;
+}
+.NavBarItem:hover {
+    border-bottom: 2px solid #FFFFFF;
+}

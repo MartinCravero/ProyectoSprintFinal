@@ -1,0 +1,30 @@
+.ExportMenu {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+.ExportFunctions {
+    position: absolute;
+    width: 402px;
+    /* background-color: white; */
+    display: flex;
+    height: 112px;
+    margin: 0 3% 0 0;
+}
+.ExportFunctions div{
+    background-color: white;
+    margin: 0 0 0 50px ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px solid rgba(0,0,0,0.25);
+    border-radius: 3.5px;
+    width: 172px;
+}
+.ExportBtnMenu {
+    color: #0683F9;
+    border: none;
+    width: 172px;
+    height: 41px;
+    margin: 0;
+}

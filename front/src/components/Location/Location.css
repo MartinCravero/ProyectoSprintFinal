@@ -1,0 +1,16 @@
+.LocationSearch select {
+    border: 1px #CCCCCC solid;
+    height: 35.5px;
+    width: 190px;
+    font-family: 'Open Sans';
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.DltBtn {
+    width: 172px;
+    height: 41px;
+    color: white;
+    background-color: #DE0028;
+    border: 1px solid #DE0028;
+}

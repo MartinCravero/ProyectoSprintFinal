@@ -1,0 +1,72 @@
+.td2 {
+    display: flex;
+    height: 56px;
+    align-items: center;
+}
+tr:hover {
+    background-color: rgba(0,0,0,0.08);
+}
+.profilePhotoDiv {
+    margin: 0 3% 0 0;
+}
+.profilePhoto {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+.profileName {
+    font-weight: 500;
+}
+.profileEmail {
+    font-size: 12px;
+    font-weight: 300;
+    color: gray;
+}
+
+.profileLocation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.profileCountry {
+    font-weight: 500;
+}
+.profileRegion {
+    font-size: 12px;
+    font-weight: 200;
+    color: #BDBDBD;
+}
+.td7 {
+    padding: 0.5%;
+}
+td .interestTd {
+	padding: 0;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: wrap;
+}
+td .interestTd div{
+	font-size: 12px;
+}
+
+/* Para mostrar las funciones de editar y borrar */
+.td8 .functions {
+    display: none;
+    color: rgba(0,0,0,0.5);
+    font-size: 18px;
+}
+tr:hover .td8 .puntos{
+    display: none;
+}
+tr:hover .td8 .functions{
+    display: flex;
+    justify-content: space-around;
+    margin: 0 20%;
+}
+.trashIcon:hover {
+    color: black;
+}
+.penIcon:hover {
+    color: black;
+}
