@@ -2,12 +2,12 @@ const {dbSelecRedId, dbElimContactoRedes, dbElimRed, dmElimContacto} = require('
 const Response = require('../../utilities/response');
 
 const elimVariosContactos = async function (req, res) {
-    const ids = req.body.map(x => x.id_contact)
+    const ids = req.body.map(x => x.id_contacto)
     try{
         for ( let i=0; i< ids.length; i++) {
             let getChannelIds = await dbSelecRedId([ids[i]])
             await dbElimContactoRedes([ids[i]])
-            await getChannelIds.map(x => dbElimRed([x.id_channel]))
+            await getChannelIds.map(x => dbElimRed([x.id_redsoc]))
             await dmElimContacto([ids[i]])
         }
         let response = new Response(false, 200, `Contactos eliminados correctamente`)

@@ -136,16 +136,16 @@ export const AddContactModal = ({closeModal, editData}) => {
     //funciones selectores de CANALES
     const channelOptions = [
         {nombre: "Whatsapp",
-        cuenta_usuario: "whatsappUsuario",
+        cuenta: "whatsappUsuario",
         preferencia: "whatsappPref"}, 
         {nombre: "Instagram",
-        cuenta_usuario: "instagramUsuario",
+        cuenta: "instagramUsuario",
         preferencia: "instagramPref"}, 
         {nombre: "Twitter",
-        cuenta_usuario: "twitterUsuario",
+        cuenta: "twitterUsuario",
         preferencia: "twitterPref"}, 
         {nombre: "Facebook",
-        cuenta_usuario: "facebookUsuario",
+        cuenta: "facebookUsuario",
         preferencia: "facebookPref"}
     ]
 
@@ -155,7 +155,6 @@ export const AddContactModal = ({closeModal, editData}) => {
         twitterUsuario: "",
         facebookUsuario: "",
     })
-    console.log(redSocData)
     const [newRedSocData, setNewRedSocData] = useState()
 
     const handleChannelChange = (evt) => {
@@ -171,6 +170,7 @@ export const AddContactModal = ({closeModal, editData}) => {
         // e.preventDefault()
         let contactToAdd = {...contactData, redSocData}
         console.log(contactData)
+        console.log(contactToAdd)
         await fetch('/contactos', {
             method: 'POST',
             headers: { 
@@ -239,7 +239,7 @@ export const AddContactModal = ({closeModal, editData}) => {
                 provincia: editData.provincia,
                 subregion: editData.subregion
             })
-            setInterestBar(editData.interest)
+            setInterestBar(editData.interes)
         }
     }, [editData])
 
@@ -470,7 +470,7 @@ export const AddContactModal = ({closeModal, editData}) => {
                 </div>
                 <label>
                     {!newRedSocData ?
-                    <input type="text" name={x.cuenta_usuario} placeholder="@ejemplo" onChange={(evt) => handleChannelChange(evt)}></input>
+                    <input type="text" name={x.cuenta} placeholder="@ejemplo" onChange={(evt) => handleChannelChange(evt)}></input>
                     : null}
                     {newRedSocData ?
                         x.cuenta === "whatsappUsuario" ? 

@@ -1,5 +1,5 @@
 const Response = require('../utilities/response');
-const {db_getContacts, dbSelecUnContacto} = require('../models/dbContactos');
+const {dbSelecContactos, dbSelecUnContacto} = require('../models/dbContactos');
 
 async function validateAddFields (req,res,next) {
     try {
@@ -33,7 +33,7 @@ async function validateEditFields (req,res,next) {
 
 async function findDuplicate (req,res,next) {
     const {nombre, apellido, id_ciudad, email} = req.body
-    let contactsDatabase = await db_getContacts()
+    let contactsDatabase = await dbSelecContactos()
     let newDb = contactsDatabase.map(x =>  {
             let edit = JSON.parse(x.redes).map(y => JSON.parse(y))
             x.redes = edit
@@ -89,7 +89,7 @@ async function findChannelChanges (orig, newC) {
         let originalAccount = orig.redes.find(x => x.nombre == "Whatsapp")
         let newAccount = newC.newChannelData.whatsappUsuario.toString()
         let newAccountPref = newC.newChannelData.whatsappPref.toString()
-        if ((!originalAccount) || (originalAccount.user_account != newAccount) || (originalAccount.preferences != newAccountPref)) {
+        if ((!originalAccount) || (originalAccount.cuenta != newAccount) || (originalAccount.preferencia != newAccountPref)) {
             changes.push(true)
         } else changes.push(false)
     } else {
@@ -99,7 +99,7 @@ async function findChannelChanges (orig, newC) {
         let originalAccount = orig.redes.find(x => x.nombre == "Instagram")
         let newAccount = newC.newChannelData.instagramUsuario.toString()
         let newAccountPref = newC.newChannelData.instagramPref.toString()
-        if ((!originalAccount) || (originalAccount.user_account != newAccount) || (originalAccount.preferences != newAccountPref)) {
+        if ((!originalAccount) || (originalAccount.cuenta != newAccount) || (originalAccount.preferencia != newAccountPref)) {
             changes.push(true)
         } else changes.push(false)
     } else {
@@ -109,7 +109,7 @@ async function findChannelChanges (orig, newC) {
         let originalAccount = orig.redes.find(x => x.nombre == "Twitter")
         let newAccount = newC.newChannelData.twitterUsuario.toString()
         let newAccountPref = newC.newChannelData.twitterPref.toString()
-        if ((!originalAccount) || (originalAccount.user_account != newAccount) || (originalAccount.preferences != newAccountPref)) {
+        if ((!originalAccount) || (originalAccount.cuenta != newAccount) || (originalAccount.preferencia != newAccountPref)) {
             changes.push(true)
         } else changes.push(false)
     } else {
@@ -119,7 +119,7 @@ async function findChannelChanges (orig, newC) {
         let originalAccount = orig.redes.find(x => x.nombre == "Facebook")
         let newAccount = newC.newChannelData.facebookUsuario.toString()
         let newAccountPref = newC.newChannelData.facebookPref.toString()
-        if ((!originalAccount) || (originalAccount.user_account != newAccount) || (originalAccount.preferences != newAccountPref)) {
+        if ((!originalAccount) || (originalAccount.cuneta != newAccount) || (originalAccount.preferencia != newAccountPref)) {
             changes.push(true)
         } else changes.push(false)
     } else {
