@@ -5,13 +5,13 @@ El proyecto DataWarehouse se encuentra conformado por 2 carpetas principales:
 
   
 
--  **client** : donde se encuentra el **Front-End** del proyecto, el cual fue realizado utilizando *React.Js*
+-  **front** : donde se encuentra el **Front-End** del proyecto, el cual fue realizado utilizando *React.Js*
 
--  **server**: donde se encuentra el **Back-End** para lo cual se utilizo *NodeJs, Express y MariaDB*
+-  **back**: donde se encuentra el **Back-End** para lo cual se utilizo *NodeJs, Express y MariaDB*
 
   
 
-Para poner funcional el proyecto de manera local en la PC, primeramente debe instalar todo el Back-End, luego el Front, y finalmente deberá dirigirse a ésta sección:
+Para poner en funcionamiento el proyecto de manera local, primero se debe instalar el Back-End, luego el Front, y finalmente deberá dirigirse a ésta sección:
 
   
 
@@ -31,7 +31,7 @@ Para poner funcional el proyecto de manera local en la PC, primeramente debe ins
 
 3- Clonar el repositorio (o descargar) donde se encuentra todo el proyecto y las utilidades
 
-[https://github.com/gonza-folli/DataWarehouse](https://github.com/gonza-folli/DataWarehouse)
+[https://github.com/MartinCravero/ProyectoSprintFinal](https://github.com/MartinCravero/ProyectoSprintFinal)
 
   
   
@@ -60,17 +60,14 @@ https://www.apachefriends.org/download.html
 
   
 
-2- Navegar en consola hasta la siguiente carpeta `RaízDelProyecto/server/utilities` y ejecutar los archivos en el **siguiente orden**
+2- Navegar en consola hasta la siguiente carpeta `proyecto 4/back/utilities` y ejecutar los archivos en el **siguiente orden**
 
   
 
 1. “datawarehouse.sql”
 
-2. "initialDataCountries.sql"
+2. "datosIniciales.sql"
 
-3. "initialDataStates.sql"
-
-4. "initialDataGeneral.sql"
 
 El **primer archivo**  *“datawarehouse.sql”* creará las tablas en la Base de datos necesarias para el proyecto, y asimismo creará una función **"JSON_ARRAYAGG"** la cual se utiliza para obtener los canales de los contactos en formato Json devolviendo un array para manipular los mismos.
 
@@ -85,7 +82,7 @@ Los **restantes archivos** harán un volcado inicial de datos en las tablas para
 
   
 
-1- En la Raíz del proyecto `server/utilities/dbConnection.js` se encuentran los datos para conectar a la base de datos Mysql, dichos datos deben COINCIDIR con las configuraciones en XAMPP
+1- En la Raíz del proyecto `back/utilities/dbConnection.js` se encuentran los datos para conectar a la base de datos Mysql, dichos datos deben COINCIDIR con las configuraciones en XAMPP
 
   
 
@@ -119,7 +116,7 @@ PORT: 3306
 
   
 
-Toda la documentación relativa a los Endpoints de la Api se encuentra en la raíz del proyecto, carpeta “utilities/gonza-folli-DataWarehouse-1.0.0-resolved.yaml”.
+Toda la documentación relativa a los Endpoints de la Api se encuentra en la raíz del proyecto, carpeta “utilities/MartínCraveroDataWarehouse-1.0.0-resolved.yaml”.
 
   
 
@@ -129,11 +126,11 @@ Dicha documentación fue elaborada con Swagger
 
 # Guía de Instalación del FrontEnd
 
-El Front-End se encuentra en la carpeta `CarpetaRaiz/client/. El mismo fue elaborado utilizando React.
+El Front-End se encuentra en la carpeta `proyeto 4/front/. El mismo fue elaborado utilizando React.
 
   
 
-En el editor de código utilizado, abrir la terminal(consola) ubicándose en `CarpetaRaiz/client`/ y ejecutar la instrucción
+En el editor de código utilizado, abrir la terminal(consola) ubicándose en `proyecto 4/front`/ y ejecutar la instrucción
 
   
 
@@ -170,7 +167,7 @@ Para comenzar a operar se debe acceder a algún explorador web (preferentemente 
 Para comenzar a operar basta con crearse una cuenta en la pantalla de **/login** una vez iniciado el proyecto.
 Por otra parte, ya viene precargado una cuenta con privilegios de **administrador** por defecto, cuyos datos son:
 
-    usuario:	masteruser
+    usuario:	administrador
     password:	admin
 
 Dicho usuario tiene el privilegio de cambiar de rol a los demás usuarios y convertirlos en administrador.

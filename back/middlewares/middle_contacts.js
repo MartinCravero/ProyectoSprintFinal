@@ -54,8 +54,10 @@ async function findDifferences (req,res,next) {
         const {id_contacto} = req.body
         const newContact = req.body
         let contactsDatabase = await dbSelecUnContacto([id_contacto])
+        console.log(contactsDatabase)
         let originalContact = contactsDatabase.map(x =>  {
                 let edit = JSON.parse(x.redes).map(y => JSON.parse(y))
+                console.log(edit)
                 x.redes = edit
                 return x
             })
@@ -85,54 +87,55 @@ async function findHeaderChanges (orig, newC) {
 
 async function findChannelChanges (orig, newC) {
     let changes = []
-    if(newC.newChannelData.whatsappUsuario != "") {
+    if(newC.newRedSocData.whatsappUsuario != "") {
         let originalAccount = orig.redes.find(x => x.nombre == "Whatsapp")
-        let newAccount = newC.newChannelData.whatsappUsuario.toString()
-        let newAccountPref = newC.newChannelData.whatsappPref.toString()
+        let newAccount = newC.newRedSocData.whatsappUsuario.toString()
+        let newAccountPref = newC.newRedSocData.whatsappPref.toString()
         if ((!originalAccount) || (originalAccount.cuenta != newAccount) || (originalAccount.preferencia != newAccountPref)) {
             changes.push(true)
         } else changes.push(false)
     } else {
-        orig.channels.find(x => x.nombre == "Whatsapp") ? changes.push(true) : changes.push(false)
+        orig.redes.find(x => x.nombre == "Whatsapp") ? changes.push(true) : changes.push(false)
     }
-    if(newC.newChannelData.instagramUsuario != "") {
+    if(newC.newRedSocData.instagramUsuario != "") {
         let originalAccount = orig.redes.find(x => x.nombre == "Instagram")
-        let newAccount = newC.newChannelData.instagramUsuario.toString()
-        let newAccountPref = newC.newChannelData.instagramPref.toString()
+        let newAccount = newC.newRedSocData.instagramUsuario.toString()
+        let newAccountPref = newC.newRedSocData.instagramPref.toString()
         if ((!originalAccount) || (originalAccount.cuenta != newAccount) || (originalAccount.preferencia != newAccountPref)) {
             changes.push(true)
         } else changes.push(false)
     } else {
-        orig.channels.find(x => x.nombre == "Instagram") ? changes.push(true) : changes.push(false)
+        orig.redes.find(x => x.nombre == "Instagram") ? changes.push(true) : changes.push(false)
     }
-    if(newC.newChannelData.twitterUsuario != "") {
+    if(newC.newRedSocData.twitterUsuario != "") {
         let originalAccount = orig.redes.find(x => x.nombre == "Twitter")
-        let newAccount = newC.newChannelData.twitterUsuario.toString()
-        let newAccountPref = newC.newChannelData.twitterPref.toString()
+        let newAccount = newC.newRedSocData.twitterUsuario.toString()
+        let newAccountPref = newC.newRedSocData.twitterPref.toString()
         if ((!originalAccount) || (originalAccount.cuenta != newAccount) || (originalAccount.preferencia != newAccountPref)) {
             changes.push(true)
         } else changes.push(false)
     } else {
-        orig.channels.find(x => x.nombre == "Twitter") ? changes.push(true) : changes.push(false)
+        orig.redes.find(x => x.nombre == "Twitter") ? changes.push(true) : changes.push(false)
     }
-    if(newC.newChannelData.facebookUsuario != "") {
+    if(newC.newRedSocData.facebookUsuario != "") {
         let originalAccount = orig.redes.find(x => x.nombre == "Facebook")
-        let newAccount = newC.newChannelData.facebookUsuario.toString()
-        let newAccountPref = newC.newChannelData.facebookPref.toString()
+        let newAccount = newC.newRedSocData.facebookUsuario.toString()
+        let newAccountPref = newC.newRedSocData.facebookPref.toString()
         if ((!originalAccount) || (originalAccount.cuneta != newAccount) || (originalAccount.preferencia != newAccountPref)) {
             changes.push(true)
         } else changes.push(false)
     } else {
-        orig.channels.find(x => x.nombre == "Facebook") ? changes.push(true) : changes.push(false)
+        orig.redes.find(x => x.nombre == "Facebook") ? changes.push(true) : changes.push(false)
     }
+    console.log(changes)
     return changes
 }
 
 
 async function validateChannelFields (req,res,next) {
-    const {channelData} = req.body
+    const {redSocData} = req.body
     try {
-        if (channelData.whatsappUsuario !== "" || channelData.instagramUsuario !== "" || channelData.twitterUsuario !== "" || channelData.facebookUsuario !== "") {
+        if (redSocData.whatsappUsuario !== "" || redSocData.instagramUsuario !== "" || redSocData.twitterUsuario !== "" || redSocData.facebookUsuario !== "") {
             next()
         } else {
             throw new Error
@@ -145,9 +148,9 @@ async function validateChannelFields (req,res,next) {
 }
 
 async function validateChannelEditFields (req,res,next) {
-    const {newChannelData} = req.body
+    const {newRedSocData} = req.body
     try {
-        if (newChannelData.whatsappUsuario !== "" || newChannelData.instagramUsuario !== "" || newChannelData.twitterUsuario !== "" || newChannelData.facebookUsuario !== "") {
+        if (newRedSocData.whatsappUsuario !== "" || newRedSocData.instagramUsuario !== "" || newRedSocData.twitterUsuario !== "" || newRedSocData.facebookUsuario !== "") {
             next()
         } else {
             throw new Error

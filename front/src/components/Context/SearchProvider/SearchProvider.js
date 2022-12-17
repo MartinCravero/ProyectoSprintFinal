@@ -11,7 +11,7 @@ export const SearchProvider = ({children}) => {
 
     //FETCH general
     const getContacts = function () {
-        let response = fetch('/contacts', {
+        let response = fetch('/contactos', {
             headers: { 
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,

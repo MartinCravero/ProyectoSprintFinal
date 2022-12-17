@@ -12,6 +12,7 @@ export const DeleteContactModal = ({closeModal}) => {
     const token = localStorage.getItem('token')
 
     const deleteContact = async (contactData) => {
+        console.log(contactData)
         await fetch('/contactos', {
             method: 'DELETE',
             headers: { 

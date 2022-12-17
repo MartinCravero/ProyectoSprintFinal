@@ -1,4 +1,4 @@
-const {dbSelecRedId, dbElimContactoRedes, dbElimRed, dbElimContacto} = require('../../models/dbContactos');
+const {dbSelecRedId, dbElimContactoRedes, dbElimRedSoc, dbElimContacto} = require('../../models/dbContactos');
 const Response = require('../../utilities/response');
 
 const elimContactos = async function (req, res) {
@@ -6,7 +6,8 @@ const elimContactos = async function (req, res) {
     try{
         let selecRedesId = await dbSelecRedId([id_contacto])
         await dbElimContactoRedes([id_contacto])
-        await selecRedesId.map(x => dbElimRed([x.id_redsoc]))
+        console.log(selecRedesId)
+        await selecRedesId.map(x => dbElimRedSoc([x.id_redsoc]))
         await dbElimContacto([id_contacto])
         let response = new Response(false, 200, `El contacto ${nombre} ${apellido} ha sido eliminado correctamente`)
         res.status(200).send(response)
